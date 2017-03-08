@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/statusColor</item>
+        <item name="colorPrimary">@color/toolBarColor</item>
+        <!--colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。-->
+        <item name="colorAccent">@color/editColor</item>
+        <!--窗口的颜色-->
+        <item name="android:windowBackground">@color/widowColor</item>
+
+    </style>
+
+
+</resources>
