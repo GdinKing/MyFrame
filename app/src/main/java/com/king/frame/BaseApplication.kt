@@ -1,7 +1,6 @@
 package com.king.frame
 
 import android.app.Application
-
 import com.king.frame.utils.CrashHandler
 
 /**
