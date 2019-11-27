@@ -1,2 +1,3 @@
-这是一个通用的app设计框架
-service包下我使用MVP模式的设计案例
+### 一个使用Kotlin+MVP+Android安卓项目框架
+
+博客：https://blog.csdn.net/gs12software/article/details/103261053
