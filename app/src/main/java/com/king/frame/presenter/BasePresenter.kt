@@ -7,7 +7,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 
 /**
- * 基础的presenter，封装一些通用操作
+ * 基础的presenter，封装一些通用操作,关联Activity生命周期等
  *
  * @author king
  * @date 2019-11-27 11:24

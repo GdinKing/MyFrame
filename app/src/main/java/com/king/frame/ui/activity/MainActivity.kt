@@ -6,9 +6,8 @@ import android.widget.TextView
 
 import com.king.frame.R
 import com.king.frame.base.BaseActivity
-import com.king.frame.presenter.Main2Presenter
 import com.king.frame.presenter.MainPresenter
-import com.king.frame.view.MainViewBinder
+import com.king.frame.viewbinder.MainViewBinder
 import com.king.frame.utils.LogUtil
 
 /**

@@ -1,4 +1,4 @@
-package com.king.frame.view;
+package com.king.frame.viewbinder;
 
 /**
  * 基础ViewBinder，封装通用接口

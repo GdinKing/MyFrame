@@ -2,7 +2,7 @@ package com.king.frame.presenter
 
 import com.king.frame.config.AppConfig
 import com.king.frame.model.HttpHelper
-import com.king.frame.view.MainViewBinder
+import com.king.frame.viewbinder.MainViewBinder
 import kotlinx.coroutines.*
 import java.io.IOException
 
