@@ -1,4 +1,4 @@
-### 一个使用Kotlin+MVP+Androidx安卓项目框架
+### 一个使用Kotlin+MVP+AndroidX安卓项目框架
 
 针对不同分支，逐步增加功能，引入了安卓架构组件，分支区别：
 
