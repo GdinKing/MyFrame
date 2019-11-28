@@ -25,8 +25,7 @@ class MainActivity : BaseActivity(), MainViewBinder {
 
     private var mProgressDialog: ProgressDialog? = null
 
-    //lifecycle（getLifecycle()）在AppCompatActivity已经定义了，直接使用
-    private val mMainPresenter = MainPresenter(this,lifecycle)
+    private val mMainPresenter = MainPresenter(this)
 
     override val contentView: Int
         get() = R.layout.activity_main
@@ -40,6 +39,7 @@ class MainActivity : BaseActivity(), MainViewBinder {
 
     override fun initData() {
 
+        //lifecycle（getLifecycle()）在AppCompatActivity已经定义了，直接使用
         lifecycle.addObserver(mMainPresenter)//关联起来
 
         btn_get?.setOnClickListener {
