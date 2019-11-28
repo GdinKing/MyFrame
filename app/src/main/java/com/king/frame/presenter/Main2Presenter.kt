@@ -1,58 +1,33 @@
 package com.king.frame.presenter
 
+import androidx.lifecycle.*
 import com.king.frame.config.AppConfig
 import com.king.frame.model.HttpHelper
-import com.king.frame.viewbinder.MainViewBinder
+import com.king.frame.utils.LogUtil
+import com.king.frame.viewmodel.MainViewBinder
 import kotlinx.coroutines.*
 import java.io.IOException
 
 /**
- * MainActivity的Presenter写法2
- * 使用了MainScope的协程作用域
+ * MainActivity的Presenter  写法2
+ *
+ * DefaultLifecycleObserver
  *
  * @author king
  * @date 2019-11-27 11:27
  */
-class Main2Presenter(private val mViewBinder: MainViewBinder?) : BasePresenter(),CoroutineScope by MainScope() {
+class Main2Presenter(private val mViewBinder: MainViewBinder?) : Base2Presenter {
 
-    override fun onCreate() {
+    override fun onCreate(owner: LifecycleOwner) {
     }
 
-    override fun onStart() {}
-
-    override fun onStop() {}
-
-    override fun onDestory() {
-        //取消协程，防止
-        cancel()
+    override fun onStart(owner: LifecycleOwner) {
     }
 
-    /**
-     * 获取数据
-     *
-     * @param name
-     * @param tag
-     * @param page
-     * @param count
-     */
-    fun getMenuJson(name: String, page: Int, count: Int) {
-
-        mViewBinder?.showProgress()
-
-        launch {//主线程（UI线程）
-            var result = ""
-            try{
-                val deferred = async(Dispatchers.IO){//切换至异步线程执行
-                   val param = mapOf("key" to AppConfig.JUHE_KEY, "menu" to name,"pn" to page.toString(),"rn" to count.toString())
-                   HttpHelper.instance.get(AppConfig.FOOD_MENU_URL, param)
-                }
-                result = deferred.await()
-                mViewBinder?.hideProgress()
-                mViewBinder?.showBookData(result,null)
-            }catch (e:IOException){
-                mViewBinder?.hideProgress()
-                mViewBinder?.showBookData("", e)
-            }
-        }
+    override fun onStop(owner: LifecycleOwner) {
     }
+
+    override fun onDestroy(owner: LifecycleOwner) {
+    }
+
 }

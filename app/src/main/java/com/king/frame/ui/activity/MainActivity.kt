@@ -1,13 +1,14 @@
 package com.king.frame.ui.activity
 
 import android.app.ProgressDialog
+import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 
 import com.king.frame.R
 import com.king.frame.base.BaseActivity
 import com.king.frame.presenter.MainPresenter
-import com.king.frame.viewbinder.MainViewBinder
+import com.king.frame.viewmodel.MainViewBinder
 import com.king.frame.utils.LogUtil
 
 /**
@@ -24,7 +25,8 @@ class MainActivity : BaseActivity(), MainViewBinder {
 
     private var mProgressDialog: ProgressDialog? = null
 
-    private val mMainPresenter = MainPresenter(this)
+    //lifecycle（getLifecycle()）在AppCompatActivity已经定义了，直接使用
+    private val mMainPresenter = MainPresenter(this,lifecycle)
 
     override val contentView: Int
         get() = R.layout.activity_main
@@ -37,25 +39,13 @@ class MainActivity : BaseActivity(), MainViewBinder {
     }
 
     override fun initData() {
+
+        lifecycle.addObserver(mMainPresenter)//关联起来
+
         btn_get?.setOnClickListener {
             //获取网络数据
             mMainPresenter.getMenuJson("番茄", 0, 2)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mMainPresenter?.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mMainPresenter?.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mMainPresenter?.onDestory()
     }
 
     override fun showProgress() {

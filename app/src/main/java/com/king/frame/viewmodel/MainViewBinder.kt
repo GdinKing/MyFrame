@@ -1,4 +1,4 @@
-package com.king.frame.viewbinder
+package com.king.frame.viewmodel
 
 /**
  * MainActivity的UI操作接口

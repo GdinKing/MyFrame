@@ -1,10 +1,9 @@
 package com.king.frame.presenter
 
-import android.provider.Contacts
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlin.coroutines.CoroutineContext
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 
 /**
  * 基础的presenter，封装一些通用操作,关联Activity生命周期等
@@ -12,15 +11,21 @@ import kotlin.coroutines.CoroutineContext
  * @author king
  * @date 2019-11-27 11:24
  */
-abstract class BasePresenter {
-    //声明通用的作用域，可以在子Presenter直接使用
-//    protected val viewModelJob = SupervisorJob()
-//    protected val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob) //指定主作用域
-    abstract fun onCreate()
+interface BasePresenter : LifecycleObserver {
 
-    abstract fun onStart()
+    //关联onCreate()
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    fun onCreate(owner: LifecycleOwner)
 
-    abstract fun onStop()
+    //关联onStart()
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    fun onStart(owner: LifecycleOwner)
 
-    abstract fun onDestory()
+    //关联onStop()
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun onStop(owner: LifecycleOwner)
+
+    //关联onDestroy()
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy(owner: LifecycleOwner)
 }

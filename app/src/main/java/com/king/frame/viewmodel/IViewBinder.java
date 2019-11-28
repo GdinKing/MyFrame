@@ -1,4 +1,4 @@
-package com.king.frame.viewbinder;
+package com.king.frame.viewmodel;
 
 /**
  * 基础ViewBinder，封装通用接口
