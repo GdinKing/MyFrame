@@ -6,6 +6,6 @@
 
 **lifecycle:** Kotlin+MVP+AndroidX+lifecycle+协程
 
-**MVVM:** Kotlin+MVVM+AndroidX+LiveData+ViewModel+协程
+**mvvm:** Kotlin+MVVM+AndroidX+LiveData+ViewModel+协程
 
 博客：https://blog.csdn.net/gs12software/article/details/103261053
