@@ -1,4 +1,4 @@
-package com.king.frame.bean
+package com.king.frame.model.bean
 
 /**
  * 书籍实体类

@@ -49,6 +49,10 @@ dependencies {
     //OkHttp
     implementation 'com.squareup.okhttp3:okhttp:4.2.2'
 
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-rc02"
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 }
 repositories {
     mavenCentral()

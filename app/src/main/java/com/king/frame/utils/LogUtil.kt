@@ -26,14 +26,9 @@ object LogUtil {
 
     val TAG = "king"
 
-    fun i(tr: Throwable) {
-        if (isDebug) {
-            Log.i(TAG, tr.message, tr)
-        }
-    }
 
-    fun e(tr: Throwable) {
-        if (isDebug) {
+    fun e(tr: Throwable?) {
+        if (isDebug && tr != null) {
             Log.e(TAG, tr.message, tr)
         }
     }

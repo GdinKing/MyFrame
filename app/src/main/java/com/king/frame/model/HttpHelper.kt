@@ -1,5 +1,6 @@
 package com.king.frame.model
 
+import com.king.frame.model.bean.DataResult
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -23,15 +24,16 @@ class HttpHelper private constructor() {
         initOkHttpClient()
     }
 
-    private object SingletonInstance  {//单例
+    private object SingletonInstance {
+        //单例
         val INSTANCE = HttpHelper()
     }
+
+    private var okHttpClient: OkHttpClient? = null
 
     companion object {
         val instance: HttpHelper
             get() = SingletonInstance.INSTANCE
-
-        private var okHttpClient: OkHttpClient? = null
 
         val MEDIA_TYPE_JSON = "application/json; charset=utf-8".toMediaTypeOrNull()
     }
@@ -43,11 +45,14 @@ class HttpHelper private constructor() {
      * @param params
      * @return
      */
-    @Throws(IOException::class)
-    fun get(url: String, params: Map<String, String>?): String {
-        val request = Request.Builder().url(attachHttpGetParams(url,params)).build()
-        val response = okHttpClient!!.newCall(request).execute()
-        return response.body!!.string()
+    fun get(url: String, params: Map<String, String>?): DataResult {
+        return try {
+            val request = Request.Builder().url(attachHttpGetParams(url, params)).build()
+            val response = okHttpClient!!.newCall(request).execute()
+            DataResult(response.code, response.body?.string())
+        } catch (e: Exception) {
+            DataResult(400, e.message, e)
+        }
     }
 
     /**

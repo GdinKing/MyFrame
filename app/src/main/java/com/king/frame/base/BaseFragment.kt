@@ -25,14 +25,10 @@ abstract class BaseFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         mContentView = inflater.inflate(contentView, container, false)
         initView()
-        loadData()
         return mContentView
     }
 
     protected abstract fun initView()
-
-    protected abstract fun loadData()
-
 
     fun showShortToast(msg: String) {
         if (!TextUtils.isEmpty(msg)) {

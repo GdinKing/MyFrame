@@ -34,7 +34,6 @@
             android:id="@+id/btn_right"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="添加"
             android:textSize="16sp"
             android:gravity="center"
             android:padding="10dp"
