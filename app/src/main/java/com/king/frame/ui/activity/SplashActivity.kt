@@ -42,6 +42,9 @@ class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         this.isFullScreen = true
         super.onCreate(savedInstanceState)
+        setContentView(contentView)
+        initView()
+        initData()
     }
 
     override fun initView() {
