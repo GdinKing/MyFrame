@@ -1,14 +1,13 @@
 package com.king.frame.ui.activity
 
-import android.app.ProgressDialog
-import android.widget.Button
+import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.FragmentTransaction
 
 import com.king.frame.R
 import com.king.frame.base.BaseActivity
-import com.king.frame.presenter.MainPresenter
-import com.king.frame.viewbinder.MainViewBinder
-import com.king.frame.utils.LogUtil
+import com.king.frame.ui.fragment.HomeFragment
+import com.king.frame.ui.fragment.MyFragment
 
 /**
  * 主界面
@@ -17,66 +16,91 @@ import com.king.frame.utils.LogUtil
  * @author king
  * @date 2019-11-27 10:30
  */
-class MainActivity : BaseActivity(), MainViewBinder {
+class MainActivity : BaseActivity(),View.OnClickListener{
 
-    private var tv_data: TextView? = null
-    private var btn_get: Button? = null
+    private var homeFragment: HomeFragment? = null
+    private var myFragment: MyFragment? = null
 
-    private var mProgressDialog: ProgressDialog? = null
-
-    private val mMainPresenter = MainPresenter(this)
+    private val tabViews = arrayOfNulls<TextView>(2)
+    private val ids = intArrayOf(R.id.tab1, R.id.tab2)//底部tab按钮id
 
     override val contentView: Int
         get() = R.layout.activity_main
 
+
+    /**
+     * 初始化视图控件
+     */
     override fun initView() {
-        tv_data = findViewById(R.id.tv_data)
-        btn_get = findViewById(R.id.btn_get)
-        mProgressDialog = ProgressDialog(this)
-        mProgressDialog!!.setMessage("加载中")
+
+        for (i in ids.indices) {
+            tabViews[i] = findViewById(ids[i])
+            tabViews[i]?.setOnClickListener(this)
+        }
+        //默认选中第一个tab
+        switchFragment(0)
     }
 
     override fun initData() {
-        btn_get?.setOnClickListener {
-            //获取网络数据
-            mMainPresenter.getMenuJson("番茄", 0, 2)
+
+    }
+
+    /**
+     * 切换fragment
+     *
+     * @param index
+     */
+    private fun switchFragment(index: Int) {
+        val ft = supportFragmentManager!!.beginTransaction()
+        hideFragments(ft)
+        changeSelect(index)//切换按钮状态
+        when (index) {
+            0 -> if (homeFragment != null) {
+                ft.show(homeFragment!!)
+            } else {
+                homeFragment = HomeFragment.newInstance()
+                ft.add(R.id.fl_container, homeFragment!!, "home")
+            }
+            1 -> if (myFragment != null) {
+                ft.show(myFragment!!)
+            } else {
+                myFragment = MyFragment.newInstance()
+                ft.add(R.id.fl_container, myFragment!!, "my")
+            }
+        }
+        ft.commitAllowingStateLoss()
+    }
+
+    /**
+     * 隐藏Fragment
+     *
+     * @param ft
+     */
+    private fun hideFragments(ft: FragmentTransaction) {
+        if (homeFragment != null) {
+            ft.hide(homeFragment!!)
+        }
+        if (myFragment != null) {
+            ft.hide(myFragment!!)
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        mMainPresenter?.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mMainPresenter?.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mMainPresenter?.onDestory()
-    }
-
-    override fun showProgress() {
-        if (mProgressDialog != null && !mProgressDialog!!.isShowing) {
-            mProgressDialog!!.show()
+    /**
+     * 改变tab按钮选中状态
+     * @param index
+     */
+    private fun changeSelect(index: Int) {
+        for (i in tabViews.indices) {
+            tabViews[i]?.isSelected = false
         }
+        tabViews[index]?.isSelected = true
     }
 
-    override fun hideProgress() {
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog!!.dismiss()
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.tab1 -> switchFragment(0)
+            R.id.tab2 -> switchFragment(1)
         }
-    }
-
-    override fun showBookData(response: String?, error: Exception?) {
-        if (error != null) {
-            showShortToast(error?.message!!)
-            LogUtil.e(error)
-            return
-        }
-        tv_data?.text = response
     }
 
 }

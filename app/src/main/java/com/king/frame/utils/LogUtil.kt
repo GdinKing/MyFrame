@@ -38,13 +38,13 @@ object LogUtil {
         }
     }
 
-    fun e(msg: String) {
+    fun e(msg: String?) {
         if (isDebug) {
             Log.e(TAG, msg)
         }
     }
 
-    fun i(msg: String) {
+    fun i(msg: String?) {
         if (isDebug) {
             Log.i(TAG, msg)
         }

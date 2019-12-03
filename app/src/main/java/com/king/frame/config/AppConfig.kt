@@ -16,13 +16,9 @@ object AppConfig {
 
     //https://www.juhe.cn/docs/api/id/46
     //聚合数据申请的key
-    val JUHE_KEY = "3e2a77a6e04527ffb9c9dab25c67ec94"
+    const val JUHE_KEY = "3e2a77a6e04527ffb9c9dab25c67ec94"
 
     //api接口服务器地址
-    val BASE_API_URL = "http://apis.juhe.cn"
-
-    //菜谱数据接口
-    val FOOD_MENU_URL = "$BASE_API_URL/cook/query"
-
+    const val BASE_API_URL = "http://apis.juhe.cn"
 
 }
