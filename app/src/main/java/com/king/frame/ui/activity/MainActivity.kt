@@ -1,11 +1,14 @@
 package com.king.frame.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 
 import com.king.frame.R
 import com.king.frame.base.BaseActivity
+import com.king.frame.databinding.ActivityMainBinding
 import com.king.frame.ui.fragment.HomeFragment
 import com.king.frame.ui.fragment.MyFragment
 
@@ -16,27 +19,30 @@ import com.king.frame.ui.fragment.MyFragment
  * @author king
  * @date 2019-11-27 10:30
  */
-class MainActivity : BaseActivity(),View.OnClickListener{
+class MainActivity : BaseActivity(){
 
     private var homeFragment: HomeFragment? = null
     private var myFragment: MyFragment? = null
 
     private val tabViews = arrayOfNulls<TextView>(2)
-    private val ids = intArrayOf(R.id.tab1, R.id.tab2)//底部tab按钮id
 
+    private lateinit var mainActivityBinding:ActivityMainBinding
     override val contentView: Int
         get() = R.layout.activity_main
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainActivityBinding = DataBindingUtil.setContentView(this,contentView)
+        initView()
+        initData()
+    }
     /**
      * 初始化视图控件
      */
     override fun initView() {
-
-        for (i in ids.indices) {
-            tabViews[i] = findViewById(ids[i])
-            tabViews[i]?.setOnClickListener(this)
-        }
+        tabViews[0] = mainActivityBinding.tab1
+        tabViews[1] = mainActivityBinding.tab2
         //默认选中第一个tab
         switchFragment(0)
     }
@@ -96,11 +102,12 @@ class MainActivity : BaseActivity(),View.OnClickListener{
         tabViews[index]?.isSelected = true
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.tab1 -> switchFragment(0)
-            R.id.tab2 -> switchFragment(1)
-        }
-    }
 
+
+    fun onTab1Click(v:View){
+        switchFragment(0)
+    }
+    fun onTab2Click(v:View){
+        switchFragment(1)
+    }
 }

@@ -22,6 +22,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix = kotlin_version
+            versionNameSuffix = kotlin_version
+            debuggable = true
+            multiDexEnabled = true
         }
     }
     //加了下面的表示支持jdk1.8编译
@@ -32,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = 1.8
     }
+    kapt {
+        generateStubs = true
+    }
 }
 
 dependencies {
@@ -40,6 +47,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //使用协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+
+    kapt 'com.android.databinding:compiler:3.1.4'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
@@ -69,7 +78,7 @@ dependencies {
 //    implementation 'com.google.code.gson:gson:2.8.6'
 //    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'  //gson解析器
 
-    implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'//字符串解析器
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'//字符串解析器
 
     //Moshi（Json解析）
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.2'
