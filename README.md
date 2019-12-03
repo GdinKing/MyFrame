@@ -8,4 +8,6 @@
 
 **mvvm:** Kotlin+MVVM+AndroidX+LiveData+ViewModel+协程
 
+**mvvm2:** Kotlin+MVVM+AndroidX+LiveData+ViewModel+DataBinding+Retrofit+协程
+
 博客：https://blog.csdn.net/gs12software/article/details/103261053
